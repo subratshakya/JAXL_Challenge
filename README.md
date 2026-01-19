@@ -157,9 +157,4 @@ Frontend runs at `http://localhost:5173`
 <img width="740" height="851" alt="image" src="https://github.com/user-attachments/assets/7f9c0ae2-26e5-4411-a334-add5d1db48c2" />
 
 
-## Notes
-
-- Event-driven architecture using a centralized EventBus
-- WebSockets used for real-time state propagation
-- Designed for scalability and easy experimentation
 
