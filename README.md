@@ -1,104 +1,100 @@
-📞 Call Routing System
+# 📞 Call Routing System
 
-A real-time call distribution and agent management system built using TypeScript, Node.js, and React.
-The system simulates incoming calls, routes them to available agents, manages queues, and provides a real-time dashboard with live metrics via WebSockets.
+A real-time call distribution and agent management system built with **TypeScript**, **Node.js**, and **React**.
 
-📖 Overview
+---
 
-This project models a realistic call center environment with:
+## 📖 Overview
 
-Automatic call generation
+This system simulates a realistic call center environment by automatically generating incoming calls, routing them to available agents, managing FIFO queues, and broadcasting real-time state updates to a live dashboard via WebSockets.
 
-FIFO call queueing
+---
 
-Agent availability management
+## 🏗 Architecture
 
-Real-time monitoring dashboard
+The system is composed of two primary components:
 
-Metrics collection and visualization
+### Backend (TypeScript / Node.js)
 
-All state changes are event-driven and broadcast live to the frontend.
+| Component | Description |
+|---------|-------------|
+| **CallRoutingServer** | Orchestrates all system components |
+| **CallEngine** | Generates calls at configurable intervals |
+| **StateManager** | Maintains global state for calls and agents |
+| **Router** | Routes calls to agents or queues |
+| **AgentManager** | Manages agent availability and assignments |
+| **PickupSimulator** | Simulates call pickup behavior |
+| **MetricsCollector** | Collects and computes system metrics |
+| **EventBus** | Event-driven communication layer |
 
-🏗 Architecture
+---
 
-The system consists of two main components:
+### Frontend (React)
 
-Backend (TypeScript / Node.js)
-Component	Responsibility
-CallRoutingServer	Bootstraps and orchestrates all services
-CallEngine	Generates calls at configurable intervals
-StateManager	Maintains system state (agents & calls)
-Router	Routes calls to agents or queues
-AgentManager	Manages agent lifecycle and availability
-PickupSimulator	Simulates call pickup behavior
-MetricsCollector	Computes real-time system metrics
-EventBus	Event-driven communication backbone
-Frontend (React)
+- WebSocket-based real-time dashboard
+- Displays:
+  - Agent statuses
+  - Call states
+  - Queue length
+  - System metrics
 
-WebSocket-based real-time dashboard
+---
 
-Displays:
+## ✨ Features
 
-Agent states
+- **Real-time Call Generation**  
+  Automatically generates calls every 2 seconds
 
-Call states
+- **Agent Management**  
+  Manages 5 agents with `AVAILABLE` and `BUSY` states
 
-Queue length
+- **Call Lifecycle Tracking**  
+  `DIALING → RINGING → CONNECTED → COMPLETED / DROPPED`
 
-System metrics
+- **FIFO Queue Management**  
+  Queues calls when no agents are available
 
-✨ Features
+- **Live Dashboard**  
+  Real-time UI updates via WebSockets
 
-Real-time Call Generation
-Calls generated automatically every 2 seconds
+- **Metrics Collection**
+  - Total calls
+  - Completed calls
+  - Dropped calls
+  - Average wait time
+  - Agent utilization
 
-Agent Management
-5 agents with AVAILABLE / BUSY states
+---
 
-Call Lifecycle Tracking
-DIALING → RINGING → CONNECTED → COMPLETED / DROPPED
+## 🔄 How It Works
 
-FIFO Queue Management
-Calls queued when no agents are available
+1. **Call Generation**  
+   `CallEngine` generates new calls at fixed intervals
 
-Live Dashboard
-WebSocket-powered real-time UI updates
+2. **Pickup Simulation**  
+   `PickupSimulator` determines pickup using configurable probability
 
-Metrics Collection
+3. **Routing**  
+   `Router` assigns calls to free agents or enqueues them
 
-Total calls
+4. **State Management**  
+   `StateManager` tracks call and agent states
 
-Completed calls
+5. **Real-time Updates**  
+   WebSocket connections broadcast state changes to the frontend
 
-Dropped calls
+---
 
-Average wait time
+## ⚙️ Configuration
 
-Agent utilization
-
-🔄 How It Works
-
-Call Generation
-CallEngine generates new calls at fixed intervals
-
-Pickup Simulation
-PickupSimulator decides pickup with configurable probability
-
-Routing
-Router assigns calls to free agents or queues them
-
-State Management
-StateManager tracks all call and agent states
-
-Real-time Updates
-State changes are broadcast via WebSockets to the frontend
-
-⚙️ Configuration
-
-All system parameters are configurable in:
+All system parameters can be modified in:
 
 backend/src/config/constants.ts
 
+yaml
+Copy code
+
+```ts
 CALL_GENERATION_RATE_MS: 2000
 PICKUP_DELAY_MIN_MS: 2000
 PICKUP_DELAY_MAX_MS: 6000
@@ -107,17 +103,14 @@ CALL_DURATION_MIN_MS: 5000
 CALL_DURATION_MAX_MS: 15000
 NUM_AGENTS: 5
 WEB_SOCKET_PORT: 3001
-
 🧪 Testing
 Framework
-
 Jest
 
 ts-jest for TypeScript support
 
 Test Coverage
-
-The test suite focuses on core system components:
+The test suite covers core system components:
 
 CallQueue
 
@@ -129,7 +122,7 @@ Empty state handling
 
 StateManager
 
-Agent & call lifecycle
+Agent and call lifecycle
 
 State transitions
 
@@ -143,17 +136,9 @@ Multiple listeners
 
 Event isolation
 
-Test Structure
-
-Isolated unit tests
-
-Fresh state via beforeEach
-
-Event-driven behavior validation
-
-Public API focused testing
-
 Running Tests
+bash
+Copy code
 # Run all tests
 npm test
 
@@ -162,33 +147,34 @@ npm run test:watch
 
 # Coverage report
 npm run test:coverage
-
 🚀 Setup & Installation
 Prerequisites
-
 Node.js (>= 18)
 
 npm or yarn
 
 Backend Setup
+bash
+Copy code
 cd backend
 npm install
 npm start
-
-
-Backend runs on WebSocket port 3001
+Backend runs on WebSocket port 3001.
 
 Frontend Setup
+bash
+Copy code
 cd frontend
 npm install
 npm start
+Frontend runs at:
 
-
-Frontend runs on:
-
+arduino
+Copy code
 http://localhost:5173
-
 📁 File Structure
+pgsql
+Copy code
 ├── backend/
 │   ├── src/
 │   │   ├── core/
@@ -214,13 +200,9 @@ http://localhost:5173
 │   ├── src/
 │   │   └── App.jsx
 │   └── index.html
-
 📝 Notes
-
-Fully event-driven architecture
+Event-driven architecture using a centralized EventBus
 
 WebSockets used for real-time state propagation
 
-Designed for scalability and extensibility
-
-Ideal for experimenting with call-center routing strategies
+Designed for scalability and easy experimentation
