@@ -152,9 +152,14 @@ Frontend runs at `http://localhost:5173`
 │   │   └── App.jsx
 │   └── index.html
 ```
+## Screenshots
+<img width="1750" height="914" alt="image" src="https://github.com/user-attachments/assets/dc5044e7-4145-45e7-825d-23680cfde4a1" />
+<img width="740" height="851" alt="image" src="https://github.com/user-attachments/assets/7f9c0ae2-26e5-4411-a334-add5d1db48c2" />
+
 
 ## Notes
 
 - Event-driven architecture using a centralized EventBus
 - WebSockets used for real-time state propagation
 - Designed for scalability and easy experimentation
+
