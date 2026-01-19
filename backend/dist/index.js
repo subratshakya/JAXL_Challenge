@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const server_1 = require("./server");
+const server = new server_1.CallRoutingServer();
+server.start();
+console.log('Call Routing System started successfully');
